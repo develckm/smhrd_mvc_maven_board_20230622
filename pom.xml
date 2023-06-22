@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--  maven 라이브러리 의존성 주입 및 배포관리 pom.xml 스프링!! -->
+    <!-- dependencies : 라이브러리의 읜존성 관리 (유저/.m2/하위)   -->
+    <groupId>co.kr.smhrd</groupId>
+    <artifactId>mvc_maven_20230621</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>mvc_maven_20230621</name>
+    <packaging>war</packaging>
+    <!--  Web Application Resource or Web application ARchive
+        jar : Java Resource or Java ARchive 자바 모듈(라이브러리)은 jar로 배포된다.
+        war : 웹어플리케이션을 배포할때 압축한 형태 (톰캣 서버에 배포 : 웹앱은 톰캣 서버에 의존적이다.)
+        보통 자바모듈은 jar 로 배포되지만 자바로 작성된 웹앱만 war 로 배포된다.
+        톰캣에 읜존적인 것 : main 함수가 톰캣에 있다. 톰캣에서 제공하는 서블릿관련 라이브러리만 사용해야한다. (새로운건 없다.)
+    -->
+    <!--   jnuit5 : 단위테스트(tdd)를 사용하는 라이브러리 maven을 사용하면 같이 사용가능 (독자적인 엔진이 존재 jvm을 사용하지 않는다)-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <junit.version>5.9.2</junit.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc11</artifactId>
+            <version>21.9.0.0</version>
+        </dependency>
+        <!-- 어노테이션으로 dto의 get set, 생성자, toString...을 자동 완성
+               JVM 이랑 IDE가 같이 동작한다.
+               -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>5.3.0</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
